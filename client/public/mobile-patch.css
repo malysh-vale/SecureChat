@@ -1,0 +1,590 @@
+/* ============================================================
+   SecureChat — Mobile App Style Patch
+   Diseño vertical limpio tipo app real
+============================================================ */
+
+/* ─────────────────────────────────────────
+   VARIABLES
+───────────────────────────────────────── */
+
+:root {
+
+  --sidebar-width-mobile: 280px;
+
+  --transition-sidebar:
+    0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --safe-area-left:
+    max(0px, env(safe-area-inset-left));
+
+  --safe-area-right:
+    max(0px, env(safe-area-inset-right));
+
+  --safe-area-top:
+    max(0px, env(safe-area-inset-top));
+
+  --safe-area-bottom:
+    max(0px, env(safe-area-inset-bottom));
+
+}
+
+/* ─────────────────────────────────────────
+   RESET
+───────────────────────────────────────── */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body,
+#root{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#111827;
+  font-family:sans-serif;
+}
+
+body{
+  position:fixed;
+  inset:0;
+  overscroll-behavior:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ─────────────────────────────────────────
+   LAYOUT PRINCIPAL
+───────────────────────────────────────── */
+
+.flex.h-screen.overflow-hidden {
+
+  position: fixed !important;
+
+  inset: 0 !important;
+
+  width: 100vw !important;
+
+  height: 100dvh !important;
+
+  overflow: hidden !important;
+
+  background: #111827 !important;
+
+}
+
+/* CHAT PRINCIPAL */
+
+.flex.h-screen.overflow-hidden > div:last-child {
+
+  width: 100% !important;
+
+  height: 100dvh !important;
+
+  flex: 1 !important;
+
+  border-radius: 0 !important;
+
+  overflow: hidden !important;
+
+}
+
+/* CONTENIDO INTERNO */
+
+.flex.flex-col.h-full{
+
+  height:100dvh !important;
+
+}
+
+/* ─────────────────────────────────────────
+   SIDEBAR
+───────────────────────────────────────── */
+
+.flex.h-screen.overflow-hidden > div:first-child {
+
+  position: fixed !important;
+
+  top: 0;
+
+  left: 0;
+
+  width: var(--sidebar-width-mobile) !important;
+
+  max-width: 88vw !important;
+
+  height: 100dvh !important;
+
+  z-index: 1060;
+
+  transform: translateX(-100%);
+
+  transition:
+    transform var(--transition-sidebar),
+    box-shadow var(--transition-sidebar);
+
+  background: rgba(17,24,39,0.92);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: none;
+
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+
+  padding-top: var(--safe-area-top);
+
+  padding-left: var(--safe-area-left);
+
+  padding-right: var(--safe-area-right);
+
+}
+
+/* SIDEBAR ABIERTO */
+
+.flex.h-screen.overflow-hidden > div:first-child.sc-sidebar-open {
+
+  transform: translateX(0);
+
+  box-shadow:
+    4px 0 32px rgba(0,0,0,0.5);
+
+}
+
+/* ─────────────────────────────────────────
+   OVERLAY
+───────────────────────────────────────── */
+
+#sc-overlay {
+
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1050;
+
+  background: rgba(0,0,0,0.55);
+
+  backdrop-filter: blur(2px);
+
+  -webkit-backdrop-filter: blur(2px);
+
+  opacity: 0;
+
+  transition: opacity var(--transition-sidebar);
+
+}
+
+#sc-overlay.sc-visible{
+
+  opacity:1;
+
+}
+
+/* ─────────────────────────────────────────
+   BOTÓN HAMBURGUESA
+───────────────────────────────────────── */
+
+#sc-menu-btn {
+
+  display: none;
+
+  position: fixed;
+
+  top: calc(12px + var(--safe-area-top));
+
+  left: calc(12px + var(--safe-area-left));
+
+  z-index: 1100;
+
+  width: 46px;
+
+  height: 46px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #2563eb;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.35);
+
+  transition: all .2s ease;
+
+}
+
+#sc-menu-btn:active{
+
+  transform:scale(.92);
+
+}
+
+#sc-menu-btn svg{
+
+  width:22px;
+
+  height:22px;
+
+}
+
+/* ─────────────────────────────────────────
+   BOTÓN CERRAR SIDEBAR
+───────────────────────────────────────── */
+
+#sc-hide-contacts-btn {
+
+  display: none;
+
+  position: absolute;
+
+  top: calc(12px + var(--safe-area-top));
+
+  right: 12px;
+
+  width: 38px;
+
+  height: 38px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.08);
+
+  color: rgba(255,255,255,0.75);
+
+  cursor: pointer;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+/* ─────────────────────────────────────────
+   CHAT
+───────────────────────────────────────── */
+
+.flex-1.overflow-y-auto {
+
+  -webkit-overflow-scrolling: touch;
+
+  scroll-behavior: smooth;
+
+  padding-bottom: 12px !important;
+
+}
+
+/* MENOS ESPACIOS LATERALES */
+
+.px-4,
+.px-6,
+.px-8 {
+
+  padding-left: 12px !important;
+
+  padding-right: 12px !important;
+
+}
+
+/* ELIMINAR LIMITES DESKTOP */
+
+.max-w-4xl,
+.max-w-5xl,
+.max-w-6xl,
+.max-w-7xl {
+
+  max-width: 100% !important;
+
+}
+
+/* INPUT INFERIOR */
+
+.flex.flex-col.h-full > div:last-child {
+
+  background: #111827 !important;
+
+  border-top:
+    1px solid rgba(255,255,255,0.06);
+
+  padding-bottom:
+    calc(8px + var(--safe-area-bottom));
+
+}
+
+/* INPUTS */
+
+input,
+textarea {
+
+  border-radius: 18px !important;
+
+  font-size: 16px !important;
+
+}
+
+/* BOTONES */
+
+button,
+a,
+[role="button"] {
+
+  min-height: 44px;
+
+  min-width: 44px;
+
+}
+
+/* ─────────────────────────────────────────
+   MOBILE
+───────────────────────────────────────── */
+
+@media (max-width:1024px){
+
+  #sc-menu-btn{
+    display:flex;
+  }
+
+  #sc-overlay{
+    display:block;
+  }
+
+  .flex.h-screen.overflow-hidden > div:first-child #sc-hide-contacts-btn{
+    display:flex;
+  }
+
+  .flex.flex-col.h-full > div:first-child {
+
+    padding-left:
+      calc(60px + var(--safe-area-left)) !important;
+
+    padding-top:
+      var(--safe-area-top) !important;
+
+  }
+
+}
+
+/* ─────────────────────────────────────────
+   MOBILE PEQUEÑO
+───────────────────────────────────────── */
+
+@media (max-width:380px){
+
+  :root{
+    --sidebar-width-mobile:260px;
+  }
+
+  #sc-menu-btn{
+    width:40px;
+    height:40px;
+  }
+
+}
+
+/* ─────────────────────────────────────────
+   DESKTOP
+───────────────────────────────────────── */
+
+@media (min-width:1025px){
+
+  #sc-menu-btn,
+  #sc-overlay,
+  #sc-hide-contacts-btn{
+
+    display:none !important;
+
+  }
+
+}
+
+/* ─────────────────────────────────────────
+   ANIMACIONES
+───────────────────────────────────────── */
+
+@keyframes sc-slide-up{
+
+  from{
+    opacity:0;
+    transform:
+      translateX(-50%)
+      translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+
+}
+
+/* ─────────────────────────────────────────
+   PERFORMANCE
+───────────────────────────────────────── */
+
+.flex.h-screen.overflow-hidden > div:first-child{
+  contain:layout style paint;
+}
+
+#sc-overlay{
+  contain:layout style paint;
+}
+
+/* =========================================================
+   SECURECHAT — APP UI POLISH
+========================================================= */
+
+/* Fondo más elegante */
+
+body,
+html,
+#root {
+  background:
+    linear-gradient(
+      to bottom,
+      #0f172a,
+      #111827
+    ) !important;
+}
+
+/* Header superior */
+
+.flex.flex-col.h-full > div:first-child {
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  background:
+    rgba(15,23,42,0.82) !important;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.05);
+
+}
+
+/* Zona mensajes */
+
+.flex-1.overflow-y-auto {
+
+  padding-top: 10px !important;
+
+  padding-left: 10px !important;
+
+  padding-right: 10px !important;
+
+  padding-bottom: 90px !important;
+
+}
+
+/* Burbujas */
+
+.flex-1.overflow-y-auto [class*="message"],
+.flex-1.overflow-y-auto .rounded-lg {
+
+  border-radius: 18px !important;
+
+}
+
+/* Input zona inferior */
+
+.flex.flex-col.h-full > div:last-child {
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  background:
+    rgba(15,23,42,0.88) !important;
+
+  padding-top: 10px !important;
+
+}
+
+/* Caja de texto */
+
+textarea,
+input {
+
+  background:
+    rgba(255,255,255,0.06) !important;
+
+  border:
+    1px solid rgba(255,255,255,0.05) !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+/* Botón enviar */
+
+button {
+
+  transition:
+    transform .15s ease,
+    opacity .15s ease;
+
+}
+
+button:active {
+
+  transform: scale(.96);
+
+}
+
+/* Sidebar moderna */
+
+.flex.h-screen.overflow-hidden > div:first-child {
+
+  background:
+    rgba(15,23,42,0.94) !important;
+
+  border-right:
+    1px solid rgba(255,255,255,0.05);
+
+}
+
+/* Scrollbar invisible */
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Sensación más app */
+
+@media (max-width:768px){
+
+  body {
+
+    touch-action:
+      manipulation;
+
+  }
+
+  .flex.h-screen.overflow-hidden {
+
+    border-radius:0 !important;
+
+  }
+
+}

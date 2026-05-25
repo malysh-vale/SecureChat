@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /__manus__/
+Disallow: /@vite/
+
+Sitemap: https://securechat-pjgw745n.manus.space/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# User agents específicos
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
